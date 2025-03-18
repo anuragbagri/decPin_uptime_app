@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "decPin_uptime_app",
   "private": true,
   "scripts": {
     "build": "turbo run build",
