@@ -1,4 +1,4 @@
-import express, { json } from "express"
+import express from "express"
 import { authMiddleware } from "./middleware";
 import { prismaclient } from "db/client";
 
@@ -24,7 +24,6 @@ app.post("/api/v1/website", authMiddleware ,async  (req,res)=> {
 app.get("/api/v1/website/status", authMiddleware,async  (req,res)=> {
   const websiteId = req.query.websiteId! as unknown as string;    // remove this line to see the error it generates without using it
   const userId = req.userId;
-
   const data=await prismaclient.website.findFirst({
     where : {
         id : websiteId,
@@ -41,23 +40,21 @@ app.get("/api/v1/website/status", authMiddleware,async  (req,res)=> {
 
 app.get("/api/v1/websites" , authMiddleware, async (req,res)=> {
  const userId = req.userId!;
-
  const websites=await prismaclient.website.findMany({
     where : {
         userId,
         disabled : false
     }
+  }) 
+   res.json({
+     websites
+  }) 
  })
- res.json({
-    websites
- })
-})
 
 
 app.delete("/api/v1/website/" , authMiddleware,async (req,res)=> {
  const websiteId = req.body.websiteId;
  const userId = req.userId;
-
  await prismaclient.website.update({
     where : {
         id : websiteId,
