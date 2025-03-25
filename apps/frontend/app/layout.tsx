@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Appbar } from "@/components/Appbar";
 
 
 export const metadata: Metadata = {
@@ -17,7 +19,10 @@ export default function RootLayout({
     <html lang="en">
       <ClerkProvider>
       <body>
+        <ThemeProvider defaultTheme="dark" attribute='class' forcedTheme="dark">
+          <Appbar/>
         {children}
+        </ThemeProvider>
       </body>
       </ClerkProvider>
     </html>
