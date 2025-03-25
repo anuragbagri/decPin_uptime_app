@@ -44,7 +44,10 @@ app.get("/api/v1/websites" , authMiddleware, async (req,res)=> {
     where : {
         userId,
         disabled : false
-    }
+    },
+    include : {
+      ticks : true
+  }
   }) 
    res.json({
      websites
@@ -70,4 +73,4 @@ app.delete("/api/v1/website/" , authMiddleware,async (req,res)=> {
 })
 
 
-app.listen(3000);
+app.listen(8000);
